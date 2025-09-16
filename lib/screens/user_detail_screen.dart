@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:app_flutter_rest/models/user.dart';
+import 'package:flutter/material.dart';
 
 class UserDetailScreen extends StatelessWidget {
   final User user;
@@ -15,29 +15,32 @@ class UserDetailScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            if (user.avatarUrl != null)
+              Center(
+                child: ClipOval(
+                  child: Image.network(
+                    user.avatarUrl!,
+                    width: 96,
+                    height: 96,
+                    fit: BoxFit.cover,
+                    errorBuilder: (context, error, stackTrace) => CircleAvatar(
+                      radius: 48,
+                      backgroundColor: Colors.blue,
+                      child: Text(
+                        user.name.isNotEmpty ? user.name.substring(0, 1) : '?',
+                        style: const TextStyle(color: Colors.white, fontSize: 32),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            const SizedBox(height: 16.0),
             _buildInfoCard('Personal Information', [
               _buildInfoRow('Name', user.name),
               _buildInfoRow('Username', '@${user.username}'),
               _buildInfoRow('Email', user.email),
-              _buildInfoRow('Phone', user.phone),
-              _buildInfoRow('Website', user.website),
-            ]),
-            const SizedBox(height: 16.0),
-            _buildInfoCard('Address', [
-              _buildInfoRow('Street', user.address.street),
-              _buildInfoRow('Suite', user.address.suite),
-              _buildInfoRow('City', user.address.city),
-              _buildInfoRow('Zipcode', user.address.zipcode),
-              _buildInfoRow(
-                'Coordinates',
-                '${user.address.geo.lat}, ${user.address.geo.lng}',
-              ),
-            ]),
-            const SizedBox(height: 16.0),
-            _buildInfoCard('Company', [
-              _buildInfoRow('Name', user.company.name),
-              _buildInfoRow('Catch Phrase', user.company.catchPhrase),
-              _buildInfoRow('BS', user.company.bs),
+              if (user.phone != null) _buildInfoRow('Phone', user.phone!),
+              if (user.location != null) _buildInfoRow('Location', user.location!),
             ]),
           ],
         ),

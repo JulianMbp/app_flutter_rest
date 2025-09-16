@@ -1,4 +1,7 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.app_flutter_rest">
+    <!-- Permiso de Internet necesario para cargar imágenes desde la red -->
+    <uses-permission android:name="android.permission.INTERNET" />
     <application
         android:label="app_flutter_rest"
         android:name="${applicationName}"
