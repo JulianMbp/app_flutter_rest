@@ -86,6 +86,15 @@ class _UserListScreenState extends State<UserListScreen> {
                       ),
                     ),
                   const SizedBox(height: 16.0),
+                  // Mostrar URL del avatar para debugging (puedes quitarlo después)
+                  if (user.avatarUrl != null)
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                      child: Text(
+                        user.avatarUrl!,
+                        style: const TextStyle(fontSize: 12, color: Colors.grey),
+                      ),
+                    ),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 24.0),
                     child: Card(

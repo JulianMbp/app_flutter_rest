@@ -33,7 +33,14 @@ class ApiService {
   /// Obtiene un solo usuario aleatorio
   Future<User> getRandomUser() async {
     final users = await getUsers(1);
-    if (users.isNotEmpty) return users.first;
+    if (users.isNotEmpty) {
+      final user = users.first;
+      // Debug: imprimir la URL del avatar para verificar
+      // (se puede eliminar luego)
+      // ignore: avoid_print
+      print('DEBUG: random user avatarUrl = ${user.avatarUrl}');
+      return user;
+    }
     throw Exception('No users returned from randomuser API');
   }
 }
